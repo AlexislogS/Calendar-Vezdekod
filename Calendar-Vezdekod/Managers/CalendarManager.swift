@@ -29,18 +29,8 @@ class CalendarManager {
     return dateFormatter.string(from: date)
   }
   
-  func yearString(date: Date) -> String {
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy"
-    return dateFormatter.string(from: date)
-  }
-  
   func daysInMonth(date: Date) -> Int {
     calendar.range(of: .day, in: .month, for: date)?.count ?? 0
-  }
-  
-  func dayOffMonth(date: Date) -> Int {
-    calendar.dateComponents([.day], from: date).day ?? 0
   }
   
   func firstOfMonth(date: Date) -> Date? {
@@ -49,6 +39,10 @@ class CalendarManager {
   }
   
   func weekDay(date: Date) -> Int {
-    (calendar.dateComponents([.weekday], from: date).weekday ?? 0) - 2
+    let weekday = (calendar.dateComponents([.weekday], from: date).weekday ?? 0) - 2
+    if weekday < 0 {
+      return 7 + weekday
+    }
+    return weekday
   }
 }

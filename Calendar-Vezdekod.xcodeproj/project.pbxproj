@@ -15,6 +15,8 @@
 		EA76D4D12813EFF400BBB5CC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA76D4CF2813EFF400BBB5CC /* LaunchScreen.storyboard */; };
 		EA76D4D92813F36000BBB5CC /* CalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76D4D82813F36000BBB5CC /* CalendarCell.swift */; };
 		EA76D4DB2813F77C00BBB5CC /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76D4DA2813F77B00BBB5CC /* CalendarManager.swift */; };
+		EA76D4DD2814041300BBB5CC /* DaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76D4DC2814041300BBB5CC /* DaysViewController.swift */; };
+		EA76D4DF28142B9E00BBB5CC /* MonthPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76D4DE28142B9E00BBB5CC /* MonthPageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		EA76D4D22813EFF400BBB5CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA76D4D82813F36000BBB5CC /* CalendarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarCell.swift; sourceTree = "<group>"; };
 		EA76D4DA2813F77B00BBB5CC /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
+		EA76D4DC2814041300BBB5CC /* DaysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysViewController.swift; sourceTree = "<group>"; };
+		EA76D4DE28142B9E00BBB5CC /* MonthPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthPageViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,17 +64,67 @@
 		EA76D4C32813EFF300BBB5CC /* Calendar-Vezdekod */ = {
 			isa = PBXGroup;
 			children = (
-				EA76D4C42813EFF300BBB5CC /* AppDelegate.swift */,
-				EA76D4C62813EFF300BBB5CC /* SceneDelegate.swift */,
-				EA76D4C82813EFF300BBB5CC /* CalendarViewController.swift */,
-				EA76D4DA2813F77B00BBB5CC /* CalendarManager.swift */,
-				EA76D4D82813F36000BBB5CC /* CalendarCell.swift */,
-				EA76D4CA2813EFF300BBB5CC /* Main.storyboard */,
-				EA76D4CD2813EFF400BBB5CC /* Assets.xcassets */,
-				EA76D4CF2813EFF400BBB5CC /* LaunchScreen.storyboard */,
+				EA76D4E128142C3F00BBB5CC /* Application */,
+				EA76D4E028142C2E00BBB5CC /* Controllers */,
+				EA76D4E228142C4700BBB5CC /* Managers */,
+				EA76D4E428142C5300BBB5CC /* Views */,
+				EA76D4E528142C6400BBB5CC /* Resources */,
 				EA76D4D22813EFF400BBB5CC /* Info.plist */,
 			);
 			path = "Calendar-Vezdekod";
+			sourceTree = "<group>";
+		};
+		EA76D4E028142C2E00BBB5CC /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				EA76D4C82813EFF300BBB5CC /* CalendarViewController.swift */,
+				EA76D4DC2814041300BBB5CC /* DaysViewController.swift */,
+				EA76D4DE28142B9E00BBB5CC /* MonthPageViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		EA76D4E128142C3F00BBB5CC /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				EA76D4C42813EFF300BBB5CC /* AppDelegate.swift */,
+				EA76D4C62813EFF300BBB5CC /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		EA76D4E228142C4700BBB5CC /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				EA76D4DA2813F77B00BBB5CC /* CalendarManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		EA76D4E328142C4E00BBB5CC /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				EA76D4D82813F36000BBB5CC /* CalendarCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		EA76D4E428142C5300BBB5CC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EA76D4E328142C4E00BBB5CC /* Cells */,
+				EA76D4CA2813EFF300BBB5CC /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		EA76D4E528142C6400BBB5CC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EA76D4CD2813EFF400BBB5CC /* Assets.xcassets */,
+				EA76D4CF2813EFF400BBB5CC /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,7 +200,9 @@
 			files = (
 				EA76D4C92813EFF300BBB5CC /* CalendarViewController.swift in Sources */,
 				EA76D4C52813EFF300BBB5CC /* AppDelegate.swift in Sources */,
+				EA76D4DF28142B9E00BBB5CC /* MonthPageViewController.swift in Sources */,
 				EA76D4C72813EFF300BBB5CC /* SceneDelegate.swift in Sources */,
+				EA76D4DD2814041300BBB5CC /* DaysViewController.swift in Sources */,
 				EA76D4D92813F36000BBB5CC /* CalendarCell.swift in Sources */,
 				EA76D4DB2813F77C00BBB5CC /* CalendarManager.swift in Sources */,
 			);
