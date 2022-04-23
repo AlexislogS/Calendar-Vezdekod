@@ -26,7 +26,7 @@ class CalendarManager {
   func monthString(date: Date) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "LLLL"
-    return dateFormatter.string(from: date)
+    return dateFormatter.string(from: date).capitalized
   }
   
   func daysInMonth(date: Date) -> Int {

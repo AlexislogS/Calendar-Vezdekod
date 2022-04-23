@@ -39,8 +39,17 @@ class MonthPageViewController: UIPageViewController, UIPageViewControllerDataSou
     return daysVCs.count
   }
   
+  func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+    return 6
+  }
+  
   private func setUp() {
     guard !selectedDates.isEmpty else { return }
+    
+    let pageControl = UIPageControl.appearance(whenContainedInInstancesOf: [MonthPageViewController.self])
+    pageControl.pageIndicatorTintColor = .systemGray3
+    pageControl.currentPageIndicatorTintColor = .systemBlue
+    
     for index in selectedDates.indices {
       let storyboard = UIStoryboard(name: "Main", bundle: .main)
       if let daysVC = storyboard.instantiateViewController(withIdentifier: String(describing: DaysViewController.self)) as? DaysViewController {
