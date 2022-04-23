@@ -11,6 +11,7 @@ class MonthPageViewController: UIPageViewController, UIPageViewControllerDataSou
   
   var selectedDates = [Date]()
   var changedMonth: ((Date) -> Void)?
+  var changedDay: ((String?, String?) -> Void)?
   
   private var daysVCs = [UIViewController]()
   
@@ -35,13 +36,9 @@ class MonthPageViewController: UIPageViewController, UIPageViewControllerDataSou
     return daysVCs[currentIndex + 1]
   }
   
-  func presentationCount(for pageViewController: UIPageViewController) -> Int {
-    return daysVCs.count
-  }
+  func presentationCount(for pageViewController: UIPageViewController) -> Int { daysVCs.count }
   
-  func presentationIndex(for pageViewController: UIPageViewController) -> Int {
-    return 6
-  }
+  func presentationIndex(for pageViewController: UIPageViewController) -> Int { 6 }
   
   private func setUp() {
     guard !selectedDates.isEmpty else { return }
@@ -54,6 +51,7 @@ class MonthPageViewController: UIPageViewController, UIPageViewControllerDataSou
       let storyboard = UIStoryboard(name: "Main", bundle: .main)
       if let daysVC = storyboard.instantiateViewController(withIdentifier: String(describing: DaysViewController.self)) as? DaysViewController {
         daysVC.selectedDate = selectedDates[index]
+        daysVC.changedDay = changedDay
         daysVCs.append(daysVC)
       }
     }

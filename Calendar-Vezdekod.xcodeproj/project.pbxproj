@@ -78,8 +78,8 @@
 			isa = PBXGroup;
 			children = (
 				EA76D4C82813EFF300BBB5CC /* CalendarViewController.swift */,
-				EA76D4DC2814041300BBB5CC /* DaysViewController.swift */,
 				EA76D4DE28142B9E00BBB5CC /* MonthPageViewController.swift */,
+				EA76D4DC2814041300BBB5CC /* DaysViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";

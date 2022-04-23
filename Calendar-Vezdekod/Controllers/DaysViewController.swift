@@ -10,17 +10,22 @@ import UIKit
 class DaysViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
   
   var selectedDate = Date()
+  var changedDay: ((String?, String?) -> Void)?
   
   private var totalSquares = [String]()
+  private var selectedFirstDay: Int?
+  private var selectedSecondDay: Int?
   private let calendarManager = CalendarManager.shared
   
   override func viewDidLoad() {
     super.viewDidLoad()
     collectionView.allowsMultipleSelection = true
-    if #available(iOS 14.0, *) {
-      collectionView.allowsMultipleSelectionDuringEditing = true
-    }
     setMonthView()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    updateSelectedDay()
   }
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -37,12 +42,50 @@ class DaysViewController: UICollectionViewController, UICollectionViewDelegateFl
     return cell
   }
   
+  override func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool { false }
+  
+  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    guard !totalSquares[indexPath.item].isEmpty else {
+      selectedFirstDay = nil
+      selectedSecondDay = nil
+      collectionView.indexPathsForSelectedItems?.forEach({ collectionView.deselectItem(at: $0, animated: true) })
+      updateSelectedDay()
+      return
+    }
+    let currentIndex = indexPath.item
+    if selectedFirstDay == nil && selectedSecondDay == nil {
+      selectedFirstDay = currentIndex
+    } else if let firstIndex = selectedFirstDay, selectedSecondDay == nil {
+      let secondIndex = currentIndex
+      selectedSecondDay = currentIndex
+      let range: ClosedRange<Int>
+      if firstIndex < secondIndex {
+        range = (firstIndex...secondIndex)
+      } else {
+        range = (secondIndex...firstIndex)
+      }
+      for index in range {
+        collectionView.selectItem(at:  IndexPath(item: index, section: 0), animated: true, scrollPosition: .top)
+      }
+    } else {
+      selectedFirstDay = currentIndex
+      selectedSecondDay = nil
+      collectionView.indexPathsForSelectedItems?.forEach({ collectionView.deselectItem(at: $0, animated: true) })
+      collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .top)
+    }
+    updateSelectedDay()
+  }
+  
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     guard let layout = collectionViewLayout as? UICollectionViewFlowLayout else { return .zero }
     let clientWidth = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right
     let contentWidth = clientWidth - layout.sectionInset.left - layout.sectionInset.right
     let itemWidth = ((contentWidth - (7 - 1) * layout.minimumInteritemSpacing) / 7).rounded(.down)
     return CGSize(width: itemWidth, height: itemWidth)
+  }
+  
+  private func updateSelectedDay() {
+    changedDay?(selectedFirstDay == nil ? nil : totalSquares[selectedFirstDay!], selectedSecondDay == nil ? nil : totalSquares[selectedSecondDay!])
   }
   
   private func setMonthView() {
