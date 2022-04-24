@@ -25,12 +25,14 @@ class DaysViewController: UICollectionViewController, UICollectionViewDelegateFl
     setMonthView()
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
     if let range = storageManager.ranges[storageKey] {
       selectedFirstDay = range.lowerBound
       selectedSecondDay = range.upperBound
-      selectRange(range)
+      DispatchQueue.main.async {
+        self.selectRange(range)
+      }
     }
     updateSelectedDay()
   }
@@ -55,8 +57,7 @@ class DaysViewController: UICollectionViewController, UICollectionViewDelegateFl
     guard !totalSquares[indexPath.item].isEmpty else {
       selectedFirstDay = nil
       selectedSecondDay = nil
-      collectionView.indexPathsForSelectedItems?.forEach({ collectionView.deselectItem(at: $0, animated: true) })
-      storageManager.ranges[storageKey] = nil
+      deselectRange()
       updateSelectedDay()
       return
     }
@@ -75,8 +76,7 @@ class DaysViewController: UICollectionViewController, UICollectionViewDelegateFl
       selectRange(range)
       storageManager.ranges[storageKey] = range
     } else {
-      collectionView.indexPathsForSelectedItems?.forEach({ collectionView.deselectItem(at: $0, animated: true) })
-      storageManager.ranges[storageKey] = nil
+      deselectRange()
       selectedSecondDay = nil
       selectedFirstDay = currentIndex
       collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .top)
@@ -95,6 +95,22 @@ class DaysViewController: UICollectionViewController, UICollectionViewDelegateFl
   private func selectRange(_ range: ClosedRange<Int>) {
     for index in range {
       collectionView.selectItem(at:  IndexPath(item: index, section: 0), animated: true, scrollPosition: .top)
+    }
+    for (index, _) in totalSquares.enumerated().filter({ !range.contains($0.offset) && !totalSquares[$0.offset].isEmpty }) {
+      UIView.animate(withDuration: 0.2, delay: 0, options: [.beginFromCurrentState, .allowUserInteraction], animations: { [weak self] in
+        self?.collectionView.cellForItem(at: IndexPath(item: index, section: 0))?.alpha = 0.5
+      })
+    }
+  }
+  
+  private func deselectRange() {
+    collectionView.indexPathsForSelectedItems?.forEach({ collectionView.deselectItem(at: $0, animated: true) })
+    storageManager.ranges[storageKey] = nil
+    
+    for (index, _) in totalSquares.enumerated() {
+      UIView.animate(withDuration: 0.2, delay: 0, options: [.beginFromCurrentState, .allowUserInteraction], animations: { [weak self] in
+        self?.collectionView.cellForItem(at: IndexPath(item: index, section: 0))?.alpha = 1
+      })
     }
   }
   
