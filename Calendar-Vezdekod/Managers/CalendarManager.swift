@@ -29,6 +29,12 @@ class CalendarManager {
     return dateFormatter.string(from: date).capitalized
   }
   
+  func monthNumberString(date: Date) -> String {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "MM.yy"
+    return dateFormatter.string(from: date)
+  }
+  
   func daysInMonth(date: Date) -> Int {
     calendar.range(of: .day, in: .month, for: date)?.count ?? 0
   }

@@ -16,6 +16,8 @@ class DaysViewController: UICollectionViewController, UICollectionViewDelegateFl
   private var selectedFirstDay: Int?
   private var selectedSecondDay: Int?
   private let calendarManager = CalendarManager.shared
+  private let storageManager = StorageManager.shared
+  private var storageKey: String { calendarManager.monthNumberString(date: selectedDate) }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -25,6 +27,11 @@ class DaysViewController: UICollectionViewController, UICollectionViewDelegateFl
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    if let range = storageManager.ranges[storageKey] {
+      selectedFirstDay = range.lowerBound
+      selectedSecondDay = range.upperBound
+      selectRange(range)
+    }
     updateSelectedDay()
   }
   
@@ -64,9 +71,8 @@ class DaysViewController: UICollectionViewController, UICollectionViewDelegateFl
       } else {
         range = (secondIndex...firstIndex)
       }
-      for index in range {
-        collectionView.selectItem(at:  IndexPath(item: index, section: 0), animated: true, scrollPosition: .top)
-      }
+      selectRange(range)
+      storageManager.ranges[storageKey] = range
     } else {
       selectedFirstDay = currentIndex
       selectedSecondDay = nil
@@ -82,6 +88,12 @@ class DaysViewController: UICollectionViewController, UICollectionViewDelegateFl
     let contentWidth = clientWidth - layout.sectionInset.left - layout.sectionInset.right
     let itemWidth = ((contentWidth - (7 - 1) * layout.minimumInteritemSpacing) / 7).rounded(.down)
     return CGSize(width: itemWidth, height: itemWidth)
+  }
+  
+  private func selectRange(_ range: ClosedRange<Int>) {
+    for index in range {
+      collectionView.selectItem(at:  IndexPath(item: index, section: 0), animated: true, scrollPosition: .top)
+    }
   }
   
   private func updateSelectedDay() {

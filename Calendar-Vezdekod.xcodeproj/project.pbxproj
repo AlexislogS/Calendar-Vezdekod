@@ -17,6 +17,7 @@
 		EA76D4DB2813F77C00BBB5CC /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76D4DA2813F77B00BBB5CC /* CalendarManager.swift */; };
 		EA76D4DD2814041300BBB5CC /* DaysViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76D4DC2814041300BBB5CC /* DaysViewController.swift */; };
 		EA76D4DF28142B9E00BBB5CC /* MonthPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76D4DE28142B9E00BBB5CC /* MonthPageViewController.swift */; };
+		EA76D4E8281540D300BBB5CC /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA76D4E7281540D300BBB5CC /* StorageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		EA76D4DA2813F77B00BBB5CC /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		EA76D4DC2814041300BBB5CC /* DaysViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DaysViewController.swift; sourceTree = "<group>"; };
 		EA76D4DE28142B9E00BBB5CC /* MonthPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthPageViewController.swift; sourceTree = "<group>"; };
+		EA76D4E7281540D300BBB5CC /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				EA76D4DA2813F77B00BBB5CC /* CalendarManager.swift */,
+				EA76D4E7281540D300BBB5CC /* StorageManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -205,6 +208,7 @@
 				EA76D4DD2814041300BBB5CC /* DaysViewController.swift in Sources */,
 				EA76D4D92813F36000BBB5CC /* CalendarCell.swift in Sources */,
 				EA76D4DB2813F77C00BBB5CC /* CalendarManager.swift in Sources */,
+				EA76D4E8281540D300BBB5CC /* StorageManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
