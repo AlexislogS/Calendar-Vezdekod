@@ -56,6 +56,7 @@ class DaysViewController: UICollectionViewController, UICollectionViewDelegateFl
       selectedFirstDay = nil
       selectedSecondDay = nil
       collectionView.indexPathsForSelectedItems?.forEach({ collectionView.deselectItem(at: $0, animated: true) })
+      storageManager.ranges[storageKey] = nil
       updateSelectedDay()
       return
     }
@@ -74,9 +75,10 @@ class DaysViewController: UICollectionViewController, UICollectionViewDelegateFl
       selectRange(range)
       storageManager.ranges[storageKey] = range
     } else {
-      selectedFirstDay = currentIndex
-      selectedSecondDay = nil
       collectionView.indexPathsForSelectedItems?.forEach({ collectionView.deselectItem(at: $0, animated: true) })
+      storageManager.ranges[storageKey] = nil
+      selectedSecondDay = nil
+      selectedFirstDay = currentIndex
       collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .top)
     }
     updateSelectedDay()
